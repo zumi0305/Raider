@@ -1,0 +1,8 @@
+colorama
+colorist
+requests
+curl-cffi
+websocket-client
+orjson
+uuid
+datetime
