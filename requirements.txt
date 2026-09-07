@@ -4,5 +4,4 @@ requests
 curl-cffi
 websocket-client
 orjson
-uuid
-datetime
+tls_client
