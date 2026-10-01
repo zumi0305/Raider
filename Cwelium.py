@@ -155,15 +155,23 @@ class Render:
             current_user = "Server"
         self.title(f"Cwelium | Connected as {current_user} | made by Tips-Discord")
         edges = ["╗", "║", "╚", "╝", "═", "╔"]
+            def render_ascii(self):
+        self.clear()
+        try:
+            current_user = os.getlogin()
+        except (AttributeError, OSError):
+            current_user = "Server"
+        self.title(f"Cwelium | Connected as {current_user} | made by Tips-Discord")
+        edges = ["╗", "║", "╚", "╝", "═", "╔"]
         ascii = f"""
-{' ██████╗██╗    ██╗███████╗██╗     ██╗██╗   ██╗███╗   ███╗'.center(self.size)}
-{'██╔════╝██║    ██║██╔════╝██║     ██║██║   ██║████╗ ████║'.center(self.size)}
-{'██║     ██║ █╗ ██║█████╗  ██║     ██║██║   ██║██╔████╔██║'.center(self.size)}
-{'██║     ██║███╗██║██╔══╝  ██║     ██║██║   ██║██║╚██╔╝██║'.center(self.size)}
-{'╚██████╗╚███╔███╔╝███████╗███████╗██║╚██████╔╝██║ ╚═╝ ██║'.center(self.size)}
-{' ╚═════╝ ╚══╝╚══╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝     ╚═╝'.center(self.size)}
-{''.center(self.size)}
-"""[span_14](start_span)"[span_14](end_span)
+ {' ██████╗██╗    ██╗███████╗██╗     ██╗██╗   ██╗███╗   ███╗'.center(self.size)}
+ {'██╔════╝██║    ██║██╔════╝██║     ██║██║   ██║████╗ ████║'.center(self.size)}
+ {'██║     ██║ █╗ ██║█████╗  ██║     ██║██║   ██║██╔████╔██║'.center(self.size)}
+ {'██║     ██║███╗██║██╔══╝  ██║     ██║██║   ██║██║╚██╔╝██║'.center(self.size)}
+ {'╚██████╗╚███╔███╔╝███████╗███████╗██║╚██████╔╝██║ ╚═╝ ██║'.center(self.size)}
+ {' ╚═════╝ ╚══╝╚══╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝     ╚═╝'.center(self.size)}
+ { ''.center(self.size) }
+ """
         
         for line in ascii.splitlines():
             for edge in edges:
