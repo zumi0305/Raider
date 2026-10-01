@@ -26,10 +26,10 @@ import tls_client
 import uuid
 import websocket
 
-session = tls_client.Session(client_identifier="chrome_138", random_tls_extension_order=True, ja3_string="771,4865-4866-4867,0-11-10-43-35-51-13-45-23-18-16-27-5-65281-28-25-17513,29-23-24,0", h2_settings={"HEADER_TABLE_SIZE":65536,"ENABLE_PUSH":0,"INITIAL_WINDOW_SIZE":6291456,"MAX_HEADER_LIST_SIZE":262144}, h2_settings_order=["HEADER_TABLE_SIZE","ENABLE_PUSH","INITIAL_WINDOW_SIZE","MAX_HEADER_LIST_SIZE"], supported_signature_algorithms=["ecdsa_secp256r1_sha256","rsa_pss_rsae_sha256","rsa_pkcs1_sha256","ecdsa_secp384r1_sha384","rsa_pss_rsae_sha384","rsa_pkcs1_sha384","rsa_pss_rsae_sha512","rsa_pkcs1_sha512"], supported_versions=["TLS_1_3","TLS_1_2"], key_share_curves=["GREASE","X25519","secp256r1","secp384r1"], pseudo_header_order=[":method",":authority",":scheme",":path"], connection_flow=15663105, priority_frames=[])
+session = tls_client.Session(client_identifier="chrome_138", random_tls_extension_order=True, ja3_string="771,4865-4866-4867,0-11-10-43-35-51-13-45-23-18-16-27-5-65281-28-25-17513,29-23-24,0", h2_settings={"HEADER_TABLE_SIZE":65536,"ENABLE_PUSH":0,"INITIAL_WINDOW_SIZE":6291456,"MAX_HEADER_LIST_SIZE":262144}, h2_settings_order=["HEADER_TABLE_SIZE","ENABLE_PUSH","INITIAL_WINDOW_SIZE","MAX_HEADER_LIST_SIZE"], supported_signature_algorithms=["ecdsa_secp256r1_sha256","rsa_pss_rsae_sha256","rsa_pkcs1_sha256","ecdsa_secp384r1_sha384","rsa_pss_rsae_sha384","rsa_pkcs1_sha384","rsa_pss_rsae_sha512","rsa_pkcs1_sha512"], supported_versions=["TLS_1_3","TLS_1_2"], key_share_curves=["GREASE","X25519","secp256r1","secp384r1"], pseudo_header_order=[":method",":authority",":scheme",":path"], connection_flow=15663105, priority_frames=[])[span_0](start_span)[span_0](end_span)
 
 def get_random_str(length):
-    return "".join(random.choice(string.ascii_letters + string.digits) for _ in range(length))
+    return "".join(random.choice(string.ascii_letters + string.digits) for _ in range(length))[span_1](start_span)[span_1](end_span)
 
 def wrapper(func):
     def wrapper(*args, **kwargs):
@@ -37,7 +37,7 @@ def wrapper(func):
         console.render_ascii()
         result = func(*args, **kwargs)
         return result
-    return wrapper
+    return wrapper[span_2](start_span)[span_2](end_span)
 
 C = {
     "green": h("#65fb07"),
@@ -69,7 +69,7 @@ C = {
     "khaki": h("#F0E68C"),
     "orchid": h("#DA70D6"),
     "rose": h("#FF007F")
-}
+}[span_3](start_span)[span_3](end_span)
 
 class Files:
     @staticmethod
@@ -110,43 +110,50 @@ class Files:
     def run_tasks():
         tasks = [Files.write_config, Files.write_folders, Files.write_files]
         for task in tasks:
-            task()
+            task()[span_4](start_span)[span_4](end_span)
 
-Files.run_tasks()
+Files.run_tasks()[span_5](start_span)[span_5](end_span)
 
 with open("data/proxies.txt") as f:
-    proxies = f.read().splitlines()
+    proxies = f.read().splitlines()[span_6](start_span)[span_6](end_span)
 
 with open("config.json") as f:
-    Config = json.load(f)
+    Config = json.load(f)[span_7](start_span)[span_7](end_span)
 
 with open("data/tokens.txt", "r") as f:
-    tokens = f.read().splitlines()
+    tokens = f.read().splitlines()[span_8](start_span)[span_8](end_span)
     
-proxy = Config["Proxies"]
-color = Config["Theme"]
+proxy = Config["Proxies"][span_9](start_span)[span_9](end_span)
+color = Config["Theme"][span_10](start_span)[span_10](end_span)
+
 class Render:
     def __init__(self):
         try:
             self.size = os.get_terminal_size().columns
         except (AttributeError, OSError):
             self.size = 80
-
         self.print_lock = threading.Lock()
         if not color:
             self.background = C["light_blue"]
         else:
-            self.background = C[color]
+            self.background = C[color][span_11](start_span)[span_11](end_span)
 
     def title(self, title):
-        ctypes.windll.kernel32.SetConsoleTitleW(title)
+        try:
+            ctypes.windll.kernel32.SetConsoleTitleW(title)
+        except (AttributeError, OSError):
+            pass[span_12](start_span)[span_12](end_span)
 
     def clear(self):
-        os.system("cls")
+        os.system("cls")[span_13](start_span)[span_13](end_span)
         
     def render_ascii(self):
         self.clear()
-        self.title(f"Cwelium | Connected as {os.getlogin()} | made by Tips-Discord")
+        try:
+            current_user = os.getlogin()
+        except (AttributeError, OSError):
+            current_user = "Server"
+        self.title(f"Cwelium | Connected as {current_user} | made by Tips-Discord")
         edges = ["╗", "║", "╚", "╝", "═", "╔"]
         ascii = f"""
 {' ██████╗██╗    ██╗███████╗██╗     ██╗██╗   ██╗███╗   ███╗'.center(self.size)}
@@ -156,12 +163,12 @@ class Render:
 {'╚██████╗╚███╔███╔╝███████╗███████╗██║╚██████╔╝██║ ╚═╝ ██║'.center(self.size)}
 {' ╚═════╝ ╚══╝╚══╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝     ╚═╝'.center(self.size)}
 {''.center(self.size)}
-"""
+""[span_14](start_span)"[span_14](end_span)
         
         for line in ascii.splitlines():
             for edge in edges:
                 line = line.replace(edge, f"{self.background}{edge}{C['white']}")
-            print(line)
+            print(line)[span_15](start_span)[span_15](end_span)
 
     def raider_options(self):
         with open("data/proxies.txt") as f:
@@ -183,14 +190,14 @@ class Render:
 {'│ «06» ???               «12» ???                «18» ???               «24» Exit             │'.center(self.size)}
 {'╰─────────────────────────────────────────────────────────────────────────────────────────────╯'.center(self.size)}
 {'«~» Credits'.center(self.size)}
-"""
+""[span_16](start_span)"[span_16](end_span)
         for edge in edges:
             title = title.replace(edge, f"{self.background}{edge}{C['white']}")
-        print(title)
+        print(title)[span_17](start_span)[span_17](end_span)
 
     def run(self):
         options = [self.render_ascii(), self.raider_options()]
-        ([option] for option in options)
+        ([option] for option in options)[span_18](start_span)[span_18](end_span)
 
     def log(self, text=None, color=None, token=None, log=None):
         response = f"{Fore.RESET}[{datetime.now().strftime(f'{Fore.LIGHTBLACK_EX}%H:%M:%S{Fore.RESET}')}] "
@@ -201,7 +208,7 @@ class Render:
         if log:
             response += f" ({C['gray']}{log}{C['white']})"
         with self.print_lock:
-            print(response)
+            print(response)[span_19](start_span)[span_19](end_span)
 
     def prompt(self, text, ask=None):
         prompted = f"[{C[color]}{text}{C['white']}]"
@@ -210,9 +217,9 @@ class Render:
         else:
             prompted += ": "
             
-        return prompted
+        return prompted[span_20](start_span)[span_20](end_span)
 
-console = Render()
+console = Render()[span_21](start_span)[span_21](end_span)
 
 # Big Thanks to Aniell4 for the scraper
 class Utils:
@@ -220,7 +227,7 @@ class Utils:
     def range_corrector(ranges):
         if [0, 99] not in ranges:
             ranges.insert(0, [0, 99])
-        return ranges
+        return ranges[span_22](start_span)[span_22](end_span)
 
     @staticmethod
     def get_ranges(index, multiplier, member_count):
@@ -228,7 +235,7 @@ class Utils:
         ranges = [[initial_num, initial_num + 99]]
         if member_count > initial_num + 99:
             ranges.append([initial_num + 100, initial_num + 199])
-        return Utils.range_corrector(ranges)
+        return Utils.range_corrector(ranges)[span_23](start_span)[span_23](end_span)
 
     @staticmethod
     def parse_member_list_update(response):
@@ -253,7 +260,7 @@ class Utils:
                 member_data["locations"].append(chunk["index"])
                 member_data["updates"].append(chunk["item"] if op_type != "DELETE" else [])
 
-        return member_data
+        return member_data[span_24](start_span)[span_24](end_span)
 
 class DiscordSocket(websocket.WebSocketApp):
     def __init__(self, token, guild_id, channel_id):
@@ -284,11 +291,11 @@ class DiscordSocket(websocket.WebSocketApp):
         self.members = {}
         self.ranges = [[0, 0]]
         self.last_range = 0
-        self.packets_recv = 0
+        self.packets_recv = 0[span_25](start_span)[span_25](end_span)
 
     def run(self):
         self.run_forever()
-        return self.members
+        return self.members[span_26](start_span)[span_26](end_span)
 
     def scrape_users(self):
         if not self.end_scraping:
@@ -301,7 +308,7 @@ class DiscordSocket(websocket.WebSocketApp):
                     "threads": True,
                     "channels": {self.channel_id: self.ranges}
                 }
-            }))
+            }))[span_27](start_span)[span_27](end_span)
 
     def on_open(self, ws):
         self.send(json.dumps({
@@ -340,12 +347,12 @@ class DiscordSocket(websocket.WebSocketApp):
                     "user_settings_version": -1
                 }
             }
-        }))
+        }))[span_28](start_span)[span_28](end_span)
 
     def heartbeat_thread(self, interval):
         while not self.end_scraping:
             self.send(json.dumps({"op": 1, "d": self.packets_recv}))
-            time.sleep(interval)
+            time.sleep(interval)[span_29](start_span)[span_29](end_span)
 
     def on_message(self, ws, message):
         decoded = json.loads(message)
@@ -371,7 +378,7 @@ class DiscordSocket(websocket.WebSocketApp):
         elif decoded["t"] == "GUILD_MEMBER_LIST_UPDATE":
             parsed = Utils.parse_member_list_update(decoded)
             if parsed["guild_id"] == self.guild_id:
-                self.process_updates(parsed)
+                self.process_updates(parsed)[span_30](start_span)[span_30](end_span)
 
     def process_updates(self, parsed):
         if "SYNC" in parsed["types"] or "UPDATE" in parsed["types"]:
@@ -388,7 +395,7 @@ class DiscordSocket(websocket.WebSocketApp):
                 self.scrape_users()
 
         if self.end_scraping:
-            self.close()
+            self.close()[span_31](start_span)[span_31](end_span)
 
     def process_members(self, updates):
         for item in updates:
@@ -400,19 +407,19 @@ class DiscordSocket(websocket.WebSocketApp):
                     self.members[user_id] = {
                         "tag": f"{user.get('username')}#{user.get('discriminator')}",
                         "id": user_id,
-                    }
+                    }[span_32](start_span)[span_32](end_span)
 
     def on_close(self, ws, close_code, close_msg):
-        console.log("Success", C["green"], False, f"scraped {len(self.members)} members")
+        console.log("Success", C["green"], False, f"scraped {len(self.members)} members")[span_33](start_span)[span_33](end_span)
 
 def scrape(token, guild_id, channel_id):
     sb = DiscordSocket(token, guild_id, channel_id)
-    return sb.run()
+    return sb.run()[span_34](start_span)[span_34](end_span)
     
 class Raider:
     def __init__(self):
         self.cookies, self.fingerprint = self.get_discord_cookies()
-        self.ws = websocket.WebSocket()
+        self.ws = websocket.WebSocket()[span_35](start_span)[span_35](end_span)
 
     def get_discord_cookies(self):
         try:
@@ -428,7 +435,7 @@ class Raider:
                     console.log("ERROR", C["red"], "Failed to get cookies using Static")
                     return "__dcfduid=62f9e16000a211ef8089eda5bffbf7f9; __sdcfduid=62f9e16100a211ef8089eda5bffbf7f98e904ba04346eacdf57ee4af97bdd94e4c16f7df1db5132bea9132dd26b21a2a; __cfruid=a2ccd7637937e6a41e6888bdb6e8225cd0a6f8e0-1714045775; _cfuvid=s_CLUzmUvmiXyXPSv91CzlxP00pxRJpqEhuUgJql85Y-1714045775095-0.0.1.1-604800000; locale=en-US"
         except Exception as e:
-            console.log("ERROR", C["red"], "get_discord_cookies", e)
+            console.log("ERROR", C["red"], "get_discord_cookies", e)[span_36](start_span)[span_36](end_span)
 
     def super_properties(self):
         try:
@@ -450,7 +457,7 @@ class Raider:
             properties = base64.b64encode(json.dumps(payload).encode()).decode()
             return properties
         except Exception as e:
-            console.log("ERROR", C["red"], "get_super_properties", e)
+            console.log("ERROR", C["red"], "get_super_properties", e)[span_37](start_span)[span_37](end_span)
 
     def headers(self, token):
         return {
@@ -464,602 +471,8 @@ class Raider:
             "x-discord-locale": "en-US",
             "x-debug-options": "bugReporterEnabled",
             "x-fingerprint": self.fingerprint,
-            "x-super-properties": self.super_properties(),
+            "x-super-properties": self.super_properties
         }
-    
-    def nonce(self):
-        return int(time.time() * 1000) - 1420070400000 << 22
-
-    def joiner(self, token, invite):
-        try:
-            payload = {
-                "session_id": uuid.uuid4().hex
-            }
-
-            response = session.post(
-                f"https://discord.com/api/v9/invites/{invite}",
-                headers=self.headers(token),
-                json=payload
-            )
-
-            match response.status_code:
-                case 200:
-                    console.log(f"JOINED", C["green"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", f"{response.json()['guild']['name']}")
-                case 400:
-                    console.log("CAPTCHA", C["yellow"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", f"discord.gg/{invite}")
-                case 429:
-                    console.log("CLOUDFARE", C["magenta"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", f"discord.gg/{invite}")
-                case _:
-                    console.log("FAILED", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", response.json().get("message"))
-        except Exception as e:
-            console.log("FAILED", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def leaver(self, token, guild):
-        try:
-            def get_guild_name(guild):
-                in_guild = []
-                for token in tokens:
-                    response = session.get(
-                        f"https://discord.com/api/v9/guilds/{guild}",
-                        headers=self.headers(token)
-                    )
-
-                    match response.status_code:
-                        case 200:
-                            in_guild.append(token)
-                            try:
-                                return response.json().get("name")
-                            except:
-                                return guild
-                if not in_guild:
-                    return guild
-                
-            self.guild = get_guild_name(guild)
-
-            payload = {
-                "lurking": False,
-            }
-
-            while True:
-                response = session.delete(
-                    f"https://discord.com/api/v9/users/@me/guilds/{guild}",
-                    json=payload,
-                    headers=self.headers(token)
-                )
-
-                match response.status_code:
-                    case 204:
-                        console.log("LEFT", C["green"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", self.guild)
-                        break
-                    case 429:
-                        retry_after = response.json()["retry_after"] + random.uniform(0.1, 0.5)
-                        console.log("RATELIMIT", C["yellow"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", f"Ratelimit Exceeded - {retry_after:.2f}s",)
-                        time.sleep(float(retry_after))
-                    case _:
-                        console.log("FAILED", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", response.json().get("message"))
-                        break
-        except Exception as e:
-            console.log("FAILED", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def vc_joiner(self, token, guild, channel, ws):
-        try:
-            for _ in range(1):
-                ws.connect("wss://gateway.discord.gg/?v=9&encoding=json")
-                ws.send(json.dumps({
-                    "op": 2,
-                    "d": {
-                        "token": token,
-                        "properties": {
-                            "os": "windows",
-                            "browser": "Discord",
-                            "device": "desktop"
-                        }
-                    }
-                }))
-
-                ws.send(json.dumps({
-                    "op": 4,
-                    "d": {
-                        "guild_id": guild,
-                        "channel_id": channel,
-                        "self_mute": random.choice([True, False]),
-                        "self_deaf": False
-                    }
-                }))
-
-                console.log("Joined", C[color], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**")
-        except Exception as e:
-            console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def onliner(self, token, ws):
-        try:
-            ws.connect("wss://gateway.discord.gg/?v=9&encoding=json")
-            ws.send(
-                json.dumps(
-                    {
-                        "op": 2,
-                        "d": {
-                            "token": token,
-                            "properties": {
-                                "os": "Windows",
-                            },
-                            "presence": {
-                                "status": random.choice(['online', 'dnd', 'idle']),
-                                "since": 0,
-                                "afk": False
-                            }
-                        },
-                    }
-                )
-            )
-
-            console.log("Onlined", C[color], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**")
-        except Exception as e:
-            console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def member_scrape(self, guild_id, channel_id):
-        try:
-            in_guild = []
-
-            if not os.path.exists(f"scraped/{guild_id}.json"):
-                for token in tokens:
-                    response = session.get(
-                        f"https://discord.com/api/v9/guilds/{guild_id}",
-                        headers=self.headers(token),
-                    )
-
-                    match response.status_code:
-                        case 200:
-                            in_guild.append(token)
-                            break
-
-                if not in_guild:
-                    console.log("Failed", C["red"], "Missing Access")
-                token = random.choice(in_guild)
-                members = scrape(token, guild_id, channel_id)
-
-                with open(f"scraped/{guild_id}.json", "w") as f:
-                    json.dump(list(members.keys()), f, indent=2)
-        except Exception as e:
-            console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def get_random_members(self, guild_id, count):
-        try:
-            with open(f"scraped/{guild_id}.json") as f:
-                members = json.load(f)
-
-            message = ""
-            for _ in range(int(count)):
-                message += f"<@!{random.choice(members)}>"
-            return message
-        except Exception as e:
-            console.log("FAILED", C["red"], "Failed to get Random Members", e)
-
-    def spammer(self, token, channel, message=None, guild=None, massping=None, pings=None, random_str=None):
-        try:
-            while True:
-                if massping:
-                    msg = self.get_random_members(guild, int(pings))
-
-                    payload = {
-                        "content": f"{message} {msg}"
-                    }
-                else:
-                    payload = {
-                        "content": f"{message}"
-                    }
-                
-                if random_str:
-                    payload["content"] += f" > {get_random_str(15)}"
-
-                response = session.post(
-                    f"https://discord.com/api/v9/channels/{channel}/messages",
-                    headers=self.headers(token),
-                    json=payload
-                )
-
-                match response.status_code:
-                    case 200:
-                        console.log("Sent", C["green"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**")
-                    case 429:
-                        retry_after = response.json()["retry_after"] + random.uniform(0.1, 0.5)
-                        console.log("RATELIMIT", C["yellow"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", f"Ratelimit Exceeded - {retry_after:.2f}s",)
-                        time.sleep(float(retry_after))
-                    case _:
-                        console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", response.json().get("message"))
-                        return
-                        break
-        except Exception as e:
-            console.log("FAILED", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def join_voice_channel(self, guild_id, channel_id):
-        ws = websocket.WebSocket()
-
-        def check_for_guild(token):
-            response = session.get(
-                f"https://discord.com/api/v9/guilds/{guild_id}", 
-                headers=self.headers(token)
-            )
-            match response.status_code:
-                case 200:
-                    return True
-                case _:
-                    console.log("Failed", C["red"], "Missing Access")
-
-        def check_for_channel(token):
-            if check_for_guild(token):
-                response = session.get(
-                    f"https://discord.com/api/v9/channels/{channel_id}", 
-                    headers=self.headers(token)
-                )
-
-                match response.status_code:
-                    case 200:
-                        return True
-                    case _:
-                        return False
-
-        def run(token):
-            if check_for_channel(token):
-                console.log("Joined", C["green"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", channel_id)
-                self.voice_spammer(token, ws, guild_id, channel_id, True)
-            else:
-                console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", channel_id)
-
-        with open("data/tokens.txt", "r") as f:
-            tokens = f.read().splitlines()
-
-        args = [
-            (token, ) for token in tokens
-        ]
-        Menu().run(run, args)
-
-    def voice_spammer(self, token, ws, guild_id, channel_id, close=None):
-        try:
-            self.onliner(token, ws)
-            ws.send(
-                json.dumps(
-                    {
-                        "op": 4,
-                        "d": {
-                            "guild_id": guild_id,
-                            "channel_id": channel_id,
-                            "self_mute": False,
-                            "self_deaf": False,
-                            "self_stream": False,
-                            "self_video": True,
-                        },
-                    }
-                )
-            )
-
-            ws.send(
-                json.dumps(
-                    {
-                        "op": 18,
-                        "d": {
-                            "type": "guild",
-                            "guild_id": guild_id,
-                            "channel_id": channel_id,
-                            "preferred_region": "singapore",
-                        },
-                    }
-                )
-            )
-            
-            ws.send(json.dumps({"op": 1, "d": None}))
-            if close:
-                ws.close()
-        except Exception as e:
-            console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def token_checker(self):
-        valid = []
-
-        def main(token):
-            try:
-                while True:
-                    response = session.get(
-                        "https://discordapp.com/api/v9/users/@me/library",
-                        headers=self.headers(token)
-                    )
-
-                    match response.status_code:
-                        case 200:
-                            console.log("Valid", C["green"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**")
-                            valid.append(token)
-                            break
-                        case 403:
-                            console.log("LOCKED", C["yellow"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**")
-                            break
-                        case 429:
-                            retry_after = response.json()["retry_after"] + random.uniform(0.1, 0.5)
-                            console.log("RATELIMITED", C["pink"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", f"{retry_after}s")
-                            time.sleep(retry_after)
-                        case _:
-                            console.log("Invalid", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", response.json().get("message"))
-                            break
-                with open("data/tokens.txt", "w") as f:
-                    f.write("\n".join(valid))
-            except Exception as e:
-                console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-        with open("data/tokens.txt", "r") as f:
-            tokens = f.read().splitlines()
-
-        tokens = [token.replace('"', '') for token in tokens if token]
-        tokens = list(set(tokens))
-
-        args = [
-            (token, ) for token in tokens
-        ]
-        Menu().run(main, args)
-        
-    def reactor_main(self, channel_id, message_id):
-        try:
-            with open("data/tokens.txt", "r") as f:
-                tokens = f.read().splitlines()
-
-            access_token = []
-            emojis = []
-
-            params = {
-                "around": message_id, 
-                "limit": 50
-            }
-
-            for token in tokens:
-                response = session.get(
-                    f"https://discord.com/api/v9/channels/{channel_id}/messages",
-                    headers=self.headers(token),
-                    params=params
-                )
-
-                match response.status_code:
-                    case 200:
-                        access_token.append(token)
-                        break
-
-            if not access_token:
-                console.log("Failed", C["red"], "Missing Permissions")
-                input()
-                Menu().main_menu()
-            else:
-                data = response.json()
-                for __ in data:
-                    if __["id"] == message_id:
-                        reactions = __["reactions"]
-                        for emois in reactions:
-                            if emois:
-                                emoji_id = emois["emoji"]["id"]
-                                emoji_name = emois["emoji"]["name"]
-
-                                if emoji_id is None:
-                                    emojis.append(emoji_name)
-                                else:
-                                    emojis.append(f"{emoji_name}:{emoji_id}")
-                            else:
-                                console.log("Failed", C["red"], "No reactions Found in this message",)
-                                input()
-                                Menu().main_menu()
-
-                for i, emoji in enumerate(emojis, start=1):
-                    print(f"{C[color]}0{i}:{C['white']} {emoji}")
-
-                choice = input(f"\n{console.prompt('Choice')}")
-                if choice.startswith('0') and len(choice) == 2:
-                    choice = str(int(choice))
-                selected = emojis[int(choice) - 1]
-
-            def add_reaction(token):
-                try:
-                    url = f"https://discord.com/api/v9/channels/{channel_id}/messages/{message_id}/reactions/{selected}/@me"
-
-                    if emoji_id is None:
-                        url += "?location=Message&type=0"
-                    response = session.put(url, headers=self.headers(token))
-
-                    match response.status_code:
-                        case 204:
-                            console.log("Reacted", C["green"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", selected)
-                        case _:
-                            console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", response.json().get("message"))
-                except Exception as e:
-                    console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-            args = [
-                (token,) for token in tokens
-            ]
-            Menu().run(add_reaction, args)
-
-        except Exception as e:
-            console.log("FAILED", C["red"], "Failed to get emojis", e)
-            input()
-            Menu().main_menu()
-
-    def soundbord(self, token, channel):
-        try:
-            sounds = session.get(
-                "https://discord.com/api/v9/soundboard-default-sounds",
-                headers=self.headers(token)
-            ).json()
-
-            time.sleep(1)
-
-            while True:
-                sound = random.choice(sounds)
-                name = sound.get("name")
-
-                payload = {
-                    "emoji_id": None,
-                    "emoji_name": sound.get("emoji_name"),
-                    "sound_id": sound.get("sound_id"),
-                }
-
-                response = session.post(
-                    f"https://discord.com/api/v9/channels/{channel}/send-soundboard-sound", 
-                    headers=self.headers(token), 
-                    json=payload,
-                )
-
-                match response.status_code:
-                    case 204:
-                        console.log("Success", C["green"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", f"Played {name}")
-                    case 429:
-                        retry_after = response.json()["retry_after"] + random.uniform(0.1, 0.5)
-                        console.log("RATELIMIT", C["yellow"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", f"Ratelimit Exceeded - {retry_after:.2f}s",)
-                        time.sleep(float(retry_after))
-                    case _:
-                        console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", response.json().get("message"))
-                time.sleep(random.uniform(0.56, 0.75))
-        except Exception as e:
-            console.log("FAILED", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def open_dm(self, token, user_id):
-        try:
-            payload = {
-                "recipients": [user_id]
-            }
-
-            response = session.post(
-                "https://discord.com/api/v9/users/@me/channels",
-                headers=self.headers(token),
-                json=payload
-            )
-
-            match response.status_code:
-                case 200:
-                    return response.json()["id"]
-                case _:
-                    console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", response.json().get("message"))
-                    return
-        except Exception as e:
-            console.log("FAILED", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def call_spammer(self, token, user_id):
-        try:
-            while True:
-                channel_id = self.open_dm(token, user_id)
-
-                response = session.get(
-                    f"https://discord.com/api/v9/channels/{channel_id}/call",
-                    headers=self.headers(token)
-                )
-
-                match response.status_code:
-                    case 200:
-                        console.log("Called", C["green"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", user_id)
-                        ws = websocket.WebSocket()
-                        self.voice_spammer(token, ws, None, channel_id, True)
-                    case _:
-                        console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", response.json().get("message"))
-                        return
-                time.sleep(5)
-        except Exception as e:
-            console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def dm_spammer(self, token, user_id, message):
-        try:
-            channel_id = self.open_dm(token, user_id)
-
-            while True:
-                payload = {
-                    "content": message,
-                    "nonce": self.nonce(),
-                }
-
-                response = session.post(
-                    f"https://discord.com/api/v9/channels/{channel_id}/messages",
-                    headers=self.headers(token),
-                    json=payload
-                )
-
-                match response.status_code:
-                    case 200:
-                        console.log("Send", C["green"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", user_id)
-                    case _:
-                        console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", response.json().get("message"))  
-                        break
-                time.sleep(7)
-        except Exception as e:
-            console.log("Failed", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def format_tokens(self):
-        try:
-            formatted = []
-
-            for token in tokens:
-                token = token.strip()
-
-                if token:
-                    tokens_split = token.split(":")
-                    if len(tokens_split) >= 3:
-                        formatted_token = tokens_split[2]
-                        formatted.append(formatted_token)
-                    else:
-                        formatted.append(token)
-
-            console.log("SUCCESS", C["green"], f"Formatted {len(formatted)} tokens")
-
-            with open("data/tokens.txt", "w") as f:
-                for token in formatted:
-                    f.write(f"{token}\n")
-
-            Menu().main_menu()
-        except Exception as e:
-            console.log("FAILED", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", e)
-
-    def button_bypass(self, token, message_id, channel_id, guild_id):
-        try:
-            payload = {"limit": "50", "around": message_id}
-
-            response = session.get(
-                f"https://discord.com/api/v9/channels/{channel_id}/messages",
-                params=payload,
-                headers=self.headers(token)
-            )
-
-            messages = response.json()
-            message_to_click = next((msg for msg in messages if msg["id"] == message_id), None)
-
-            if message_to_click is None:
-                console.log("FAILED", C["red"], "Message not found")
-                return
-            
-            buttons = [comp["components"][0] for comp in message_to_click.get("components", [])]
-            if not buttons:
-                console.log("FAILED", C["red"], "No buttons found in the message")
-                return
-
-            for button in buttons:
-                data = {
-                    "application_id": message_to_click["author"]["id"],
-                    "channel_id": channel_id,
-                    "data": {
-                        "component_type": 2,
-                        "custom_id": button["custom_id"],
-                    },
-                    "guild_id": guild_id,
-                    "message_flags": 0,
-                    "message_id": message_id,
-                    "nonce": self.nonce(),
-                    "session_id": uuid.uuid4().hex,
-                    "type": 3,
-                }
-
-                response = session.post(
-                    "https://discord.com/api/v9/interactions",
-                    headers=self.headers(token),
-                    json=data
-                )
-
-                match response.status_code:
-                    case 204:
-                        console.log(f"Clicked button {button['custom_id']}", C["green"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**")
-                    case _:
-                        console.log(f"Failed to click button {button['custom_id']}", C["red"], f"{Fore.RESET}{token[:25]}.{Fore.LIGHTCYAN_EX}**", {response.json().get("message")})
-        except Exception as e:
-            console.log("FAILED", C["red"], "Failed to Click Button", e)
 
     def accept_rules(self, guild_id):
         try:
@@ -1586,7 +999,7 @@ class Menu:
         channel_id = Link.split("/")[5]
 
         massping = input(console.prompt("Massping", True))
-        random_str = input(console.prompt("Random String", True))
+                random_str = input(console.prompt("Random String", True))
         message = input(console.prompt("Message"))
 
         if message == "":
@@ -1713,7 +1126,11 @@ class Menu:
         ]
 
         for line in credits_lines:
-            centered_line = line.center(os.get_terminal_size().columns)
+            try:
+                term_size = os.get_terminal_size().columns
+            except (AttributeError, OSError):
+                term_size = 80
+            centered_line = line.center(term_size)
             print(f"{Fore.RESET}{self.background}{centered_line}{Fore.RESET}")
 
         input("\n ~/> press enter to continue ")
