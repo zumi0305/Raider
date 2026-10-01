@@ -125,13 +125,13 @@ with open("data/tokens.txt", "r") as f:
     
 proxy = Config["Proxies"]
 color = Config["Theme"]
-
 class Render:
     def __init__(self):
-                try:
+        try:
             self.size = os.get_terminal_size().columns
         except (AttributeError, OSError):
             self.size = 80
+
         self.print_lock = threading.Lock()
         if not color:
             self.background = C["light_blue"]
