@@ -182,12 +182,12 @@ class Render:
         title = f"""{Fore.RESET}{' ' * max(0, (self.size - len(f'Loaded ‹{len(tokens)}› tokens | Loaded ‹{len(proxies)}› proxies')) // 2)}Loaded ‹{self.background}{len(tokens)}{Fore.RESET}› tokens | Loaded ‹{self.background}{len(proxies)}{Fore.RESET}› proxies
 
 {'╭─────────────────────────────────────────────────────────────────────────────────────────────╮'.center(self.size)}
-{'│ «01» Joiner            «07» Token Formatter    «13» Onliner           «19» Call Spammer     │'.center(self.size)}
-{'│ «02» Leaver            «08» Button Click       «14» Voice Raper       «20» Bio Change       │'.center(self.size)}
-{'│ «03» Spammer           «09» Accept Rules       «15» Change Nick       «21» Voice Joiner     │'.center(self.size)}
-{'│ «04» Token Checker     «10» Guild Check        «16» Thread Spammer    «22» Onboard Bypass   │'.center(self.size)}
-{'│ «05» Emoji Reaction    «11» Friend Spam        «17» Typer             «23» Dm Spammer       │'.center(self.size)}
-{'│ «06» ???               «12» ???                «18» ???               «24» Exit             │'.center(self.size)}
+{'│ 01 Joiner            07 Token Formatter    13 Onliner           19 Call Spammer     │'.center(self.size)}
+{'│ 02 Leaver            08 Button Click       14 Voice Raper       20 Bio Change       │'.center(self.size)}
+{'│ 03 Spammer           09 Accept Rules       15 Change Nick       21 Voice Joiner     │'.center(self.size)}
+{'│ 04 Token Checker     10 Guild Check        16 Thread Spammer    22 Onboard Bypass   │'.center(self.size)}
+{'│ 05 Emoji Reaction    11 Friend Spam        17 Typer             23 Dm Spammer       │'.center(self.size)}
+{'│ 06 ???               12 ???                18 ???               24 Exit             │'.center(self.size)}
 {'╰─────────────────────────────────────────────────────────────────────────────────────────────╯'.center(self.size)}
 {'«~» Credits'.center(self.size)}
 ""[span_16](start_span)"[span_16](end_span)
