@@ -178,8 +178,8 @@ class Render:
             global tokens
             tokens = f.read().splitlines()
 
-        edges = ["─", "╭", "│", "╰", "╯", "╮", "»", "«"]
-        title = f"""{Fore.RESET}{' ' * max(0, (self.size - len(f'Loaded ‹{len(tokens)}› tokens | Loaded ‹{len(proxies)}› proxies')) // 2)}Loaded ‹{self.background}{len(tokens)}{Fore.RESET}› tokens | Loaded ‹{self.background}{len(proxies)}{Fore.RESET}› proxies
+        edges = ["─", "╭", "│", "╰", "╯", "╮", "»", "«]
+        title = f"{Fore.RESET}{' ' * max(0, (self.size - len(f'Loaded <{len(tokens)}>')))}{self.background} Loaded <{len(tokens)}> {Fore.RESET}"
 
 {'╭─────────────────────────────────────────────────────────────────────────────────────────────╮'.center(self.size)}
 {'│ 01 Joiner            07 Token Formatter    13 Onliner           19 Call Spammer     │'.center(self.size)}
