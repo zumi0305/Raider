@@ -5,3 +5,4 @@ curl-cffi
 websocket-client
 orjson
 tls_client
+typing_extensions
