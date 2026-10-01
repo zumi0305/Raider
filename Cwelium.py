@@ -128,7 +128,11 @@ color = Config["Theme"]
 
 class Render:
     def __init__(self):
-        self.size = os.get_terminal_size().columns
+                try:
+            self.size = os.get_terminal_size().columns
+        except (AttributeError, OSError):
+            self.size = 80
+
         self.print_lock = threading.Lock()
         if not color:
             self.background = C["light_blue"]
