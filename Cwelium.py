@@ -163,7 +163,7 @@ class Render:
 {'╚██████╗╚███╔███╔╝███████╗███████╗██║╚██████╔╝██║ ╚═╝ ██║'.center(self.size)}
 {' ╚═════╝ ╚══╝╚══╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝     ╚═╝'.center(self.size)}
 {''.center(self.size)}
-""[span_14](start_span)"[span_14](end_span)
+"""[span_14](start_span)"[span_14](end_span)
         
         for line in ascii.splitlines():
             for edge in edges:
